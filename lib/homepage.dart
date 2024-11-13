@@ -1,11 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  // String _menu = "menu";
+
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        buttonBackgroundColor: const Color.fromARGB(255, 34, 180, 73),
+        color: const Color.fromARGB(255, 1, 65, 51),
+        animationCurve: Curves.fastEaseInToSlowEaseOut,
+        height: 60,
+        animationDuration: const Duration(milliseconds: 800),
+        items: <Widget>[
+          Icon(
+            Icons.home,
+            size: 30,
+            color: Colors.deepPurple[100],
+          ),
+          const Icon(
+            Icons.search,
+            size: 30,
+            color: Colors.white,
+          ),
+          const Icon(
+            Icons.add_a_photo,
+            size: 40,
+            color: Colors.white,
+          ),
+          const Icon(
+            Icons.bookmark,
+            size: 30,
+            color: Colors.white,
+          ),
+          const Icon(
+            Icons.person_2_sharp,
+            size: 30,
+            color: Colors.white,
+          )
+        ],
+        onTap: (index) {
+          setState(() {});
+        },
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -26,109 +75,78 @@ class HomePage extends StatelessWidget {
                         height: 40,
                         width: 40,
                       ),
-                      const SizedBox(
-                        width: 200,
-                      ),
-                      Stack(
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.red,
-                            ),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape:
-                                    const CircleBorder(), // Membuat tombol menjadi bulat
-                                padding: const EdgeInsets.all(
-                                    5), // Mengatur ukuran tombol di dalam Container
-                              ),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                      child: SizedBox(
-                                        height: 300,
-                                        width: 300,
-                                        child: Center(
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 5),
-                                                  child: Center(
-                                                      child: Column(
-                                                    children: [
-                                                      const Text(
-                                                        "Profile",
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 16,
-                                                      ),
-                                                      Container(
-                                                        width: 100,
-                                                        height: 100,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            50),
-                                                                image:
-                                                                    const DecorationImage(
-                                                                  image: AssetImage(
-                                                                      "image/logo.png"),
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                                color:
-                                                                    Colors.red,
-                                                                boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black
-                                                                    .withOpacity(
-                                                                        0.6),
-                                                                spreadRadius: 2,
-                                                                blurRadius: 5,
-                                                                offset:
-                                                                    const Offset(
-                                                                        2, 3),
-                                                              )
-                                                            ]),
-                                                      ),
-                                                    ],
-                                                  ))),
-                                            ],
+                      const Spacer(),
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.red,
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.person, color: Colors.white),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor:
+                                      Colors.white.withOpacity(0.9),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: const SizedBox(
+                                    height: 300,
+                                    width: 300,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage:
+                                                AssetImage("image/avatar.png"),
                                           ),
-                                        ),
+                                          SizedBox(
+                                            height: 5,
+                                            width: 200,
+                                            child: Divider(
+                                              color: Colors.black26,
+                                            ),
+                                          ),
+                                          Text("user1234",
+                                              style: TextStyle(fontSize: 18)),
+                                          SizedBox(height: 1),
+                                          Text("8LlMh@example.com",
+                                              style: TextStyle(fontSize: 16)),
+                                          SizedBox(height: 10),
+                                          InkWell(
+                                            child: Text(
+                                              "Edit",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.blue),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    );
-                                  },
+                                    ),
+                                  ),
                                 );
                               },
-                              child: const Icon(Icons.person),
-                            ),
-                          ),
-                        ],
-                      )
+                            );
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10, left: 40, right: 40),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -166,7 +184,7 @@ class HomePage extends StatelessWidget {
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 12),
+                              vertical: 17, horizontal: 12),
                           decoration: const BoxDecoration(
                             color: Colors.blue,
                             borderRadius: BorderRadius.only(
@@ -186,7 +204,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.all(2),
+              padding: EdgeInsets.all(15),
               child: Center(
                 child: Image(
                   image: AssetImage("image/Bar_information.png"),
@@ -194,111 +212,91 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 35,
-                right: 35,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Column(
                 children: [
-                  const Row(
-                    children: [
-                      Text("Category",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ))
-                    ],
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Category",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 150,
-                    width: double.infinity,
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
-                      height: 300,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 5,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: List.generate(
-                          7,
-                          (index) => Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: Container(
-                              width: 90,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 2),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 7,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Container(
+                            width: 90,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image(
+                                    image: AssetImage("image/logo.png"),
+                                    width: 60,
+                                    height: 60,
+                                  ),
+                                  Text(
+                                    "Baju",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ],
                               ),
-                              child: const Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image(
-                                      image: AssetImage("image/logo.png"),
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                    Text(
-                                      "Baju",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30, top: 5, right: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
               child: Column(
                 children: [
-                  const Row(children: [
-                    Text(
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
                       "Product",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
-                  ]),
+                  ),
                   const SizedBox(
                     height: 20,
-                    width: double.infinity,
                     child: Divider(
                       color: Colors.black,
                       thickness: 1,
                     ),
                   ),
                   SizedBox(
-                    height: 350,
+                    height: 450,
                     child: GridView.builder(
-                      itemCount: 12,
+                      scrollDirection: Axis.vertical,
+                      itemCount: 10,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,

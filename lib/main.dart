@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project/homepage.dart';
+import 'package:project/detail_product.dart';
+
 void main() {
   runApp(
-    const MaterialApp(home: HomePage()),
-    
+    MaterialApp(home: HomePage()
+        // home:DetailProduct()
+        ),
   );
 }
 
