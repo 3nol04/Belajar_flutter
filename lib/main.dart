@@ -4,8 +4,9 @@ import 'package:project/detail_product.dart';
 
 void main() {
   runApp(
-    MaterialApp(home: HomePage()
-        // home:DetailProduct()
+    MaterialApp(
+      //home: HomePage(),
+         home:DetailProduct()
         ),
   );
 }
